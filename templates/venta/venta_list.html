@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<table class="table table-bordered">
+	<thead>
+		<tr class='table-dark'>
+			<td>#</td>
+			<td>Empleado</td>
+			<td>Producto</td>
+			<td>Total</td>
+			<td>Neto</td>
+			<td>IVA</td>
+			<td>Acciones</td>
+		</tr>
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for venta in object_list %}
+		<tr class="table-active">
+			<td>{{ venta.id }}</td>
+			<td>{{ venta.empleado }}</td>
+			<td>{{ venta.producto }}</td>
+			<td>{{ venta.total }}</td>
+			<td>{{ venta.neto }}</td>
+			<td>{{ venta.iva }}</td>
+			<td>
+				<a class="btn btn-primary" href="{% url 'venta:venta_editar' venta.id %}">Editar</a>
+				<a class="btn btn-danger" href="{% url 'venta:venta_eliminar' venta.id %}">Eliminar</a>
+			</td>
+		</tr>
+		{% endfor %}
+
+		{% else %}
+		<h1>No hay registro de empleados</h1>
+
+		{% endif %}
+	</tbody>
+</table>
+
+{% endblock %}

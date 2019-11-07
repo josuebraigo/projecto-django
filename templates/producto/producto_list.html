@@ -1,0 +1,40 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<table class="table table-bordered">
+	<thead>
+		<tr class='table-dark'>
+			<td>#</td>
+			<td>Nombre</td>
+			<td>Descripción</td>
+			<td>Precio</td>
+			<td>Stock</td>
+			<td>Acciones</td>
+		</tr>
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for producto in object_list %}
+		<tr class="table-active">
+			<td>{{ producto.id }}</td>
+			<td>{{ producto.nombre }}</td>
+			<td>{{ producto.descripcion }}</td>
+			<td>{{ producto.precio }}</td>
+			<td>{{ producto.stock }}</td>
+			<td>{{ producto.proveedor }}</td>
+			<td>
+				<a class="btn btn-primary" href="{% url 'producto:producto_editar' producto.id %}">Editar</a>
+				<a class="btn btn-danger" href="{% url 'producto:producto_eliminar' producto.id %}">Eliminar</a>
+			</td>
+		</tr>
+		{% endfor %}
+
+		{% else %}
+		<h1>No hay registro de productos</h1>
+
+		{% endif %}
+	</tbody>
+</table>
+
+{% endblock %}

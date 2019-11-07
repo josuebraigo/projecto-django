@@ -1,0 +1,37 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<table class="table table-bordered">
+	<thead>
+		<tr class='table-dark'>
+			<td>#</td>
+			<td>Empresa</td>
+			<td>Empleado</td>
+			<td>RFC</td>
+			<td>Acciones</td>
+		</tr>
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for proveedor in object_list %}
+		<tr class="table-active">
+			<td>{{ proveedor.id }}</td>
+			<td>{{ proveedor.empresa }}</td>
+			<td>{{ proveedor.empleado }}</td>
+			<td>{{ proveedor.rfc }}</td>
+			<td>
+				<a class="btn btn-primary" href="{% url 'proveedor:proveedor_editar' proveedor.id %}">Editar</a>
+				<a class="btn btn-danger" href="{% url 'proveedor:proveedor_eliminar' proveedor.id %}">Eliminar</a>
+			</td>
+		</tr>
+		{% endfor %}
+
+		{% else %}
+		<h1>No hay registro de proveedores</h1>
+
+		{% endif %}
+	</tbody>
+</table>
+
+{% endblock %}

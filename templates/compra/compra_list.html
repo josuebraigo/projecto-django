@@ -1,0 +1,43 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<table class="table table-bordered">
+	<thead>
+		<tr class='table-dark'>
+			<td>#</td>
+			<td>Empleado</td>
+			<td>Producto</td>
+			<td>Neto</td>
+			<td>Iva</td>
+			<td>Total</td>
+			<td>Número de Productos</td>
+			<td>Acciones</td>
+		</tr>
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for compra in object_list %}
+		<tr class="table-active">
+			<td>{{ compra.id }}</td>
+			<td>{{ compra.empleado }}</td>
+			<td>{{ compra.producto }}</td>
+			<td>{{ compra.neto }}</td>
+			<td>{{ compra.iva }}</td>
+			<td>{{ compra.total }}</td>
+			<td>{{ compra.numero_productos }}</td>
+			<td>
+				<a class="btn btn-primary" href="{% url 'compra:compra_editar' compra.id %}">Editar</a>
+				<a class="btn btn-danger" href="{% url 'compra:compra_eliminar' compra.id %}">Eliminar</a>
+			</td>
+		</tr>
+		{% endfor %}
+
+		{% else %}
+		<h1>No hay registro de compras</h1>
+
+		{% endif %}
+	</tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<table class="table table-bordered">
+	<thead>
+		<tr class='table-dark'>
+			<td>#</td>
+			<td>Nombre</td>
+			<td>Dirección</td>
+			<td>Teléfono Local</td>
+			<td>Teléfono Movil</td>
+			<td>Fecha de Nacimiento</td>
+			<td>CURP</td>
+			<td>RFC</td>
+			<td>NSS</td>
+			<td>Sueldo</td>
+			<td>Acciones</td>
+		</tr>
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for empleado in object_list %}
+		<tr class="table-active">
+			<td>{{ empleado.id }}</td>
+			<td>{{ empleado.nombre }}</td>
+			<td>{{ empleado.direccion }}</td>
+			<td>{{ empleado.telefono_local }}</td>
+			<td>{{ empleado.telefono_movil }}</td>
+			<td>{{ empleado.fecha_nacimiento }}</td>
+			<td>{{ empleado.curp }}</td>
+			<td>{{ empleado.rfc }}</td>
+			<td>{{ empleado.nss }}</td>
+			<td>{{ empleado.sueldo }}</td>
+			<td>
+				<a class="btn btn-primary" href="{% url 'empleado:empleado_editar' empleado.id %}">Editar</a>
+				<a class="btn btn-danger" href="{% url 'empleado:empleado_eliminar' empleado.id %}">Eliminar</a>
+			</td>
+		</tr>
+		{% endfor %}
+
+		{% else %}
+		<h1>No hay registro de empleados</h1>
+
+		{% endif %}
+	</tbody>
+</table>
+
+{% endblock %}

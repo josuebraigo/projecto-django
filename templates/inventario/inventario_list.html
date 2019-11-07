@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<table class="table table-bordered">
+	<thead>
+		<tr class='table-dark'>
+			<td>#</td>
+			<td>Producto</td>
+			<td>Cantidad</td>
+			<td>Acciones</td>
+		</tr>
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for inventario in object_list %}
+		<tr class="table-active">
+			<td>{{ inventario.id }}</td>
+			<td>{{ inventario.producto }}</td>
+			<td>{{ inventario.cantidad }}</td>
+			<td>
+				<a class="btn btn-primary" href="{% url 'inventario:inventario_editar' inventario.id %}">Editar</a>
+				<a class="btn btn-danger" href="{% url 'inventario:inventario_eliminar' inventario.id %}">Eliminar</a>
+			</td>
+		</tr>
+		{% endfor %}
+
+		{% else %}
+		<h1>No hay registro de inventario</h1>
+
+		{% endif %}
+	</tbody>
+</table>
+
+{% endblock %}
